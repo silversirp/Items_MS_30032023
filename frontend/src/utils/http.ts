@@ -1,5 +1,6 @@
 export class $http {
     static request(method: string, url: string, data: any, config: any) {
+        // lisasime frontendi tsconfig.json faili lib alla "es2015.promise"
         return new Promise((resolve, reject) => {
 
             const xhr = new XMLHttpRequest();
@@ -21,7 +22,11 @@ export class $http {
                 }
 
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    resolve(parsedResponse);
+                    resolve({
+                        status: xhr.status,
+                        statusText: xhr.statusText,
+                        body: parsedResponse
+                    });
                     return;
                 }
 
@@ -59,4 +64,10 @@ export class $http {
     static post(url: string, data: any, config = {}) {
         return this.request('POST', url, data, config);
     }
+
+    static get(url: string, config = {}) {
+        return this.request('GET', url, null, config);
+    }
 }
+
+

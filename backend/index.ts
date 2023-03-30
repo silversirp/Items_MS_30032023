@@ -4,6 +4,7 @@ import YAML from 'yamljs';
 import {Error} from './types';
 import * as dotenv from 'dotenv';
 import usersRoutes from "./routes/usersRoutes";
+import itemsRoutes from "./routes/itemsRoutes";
 import cors from 'cors';
 
 dotenv.config();
@@ -24,8 +25,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Routes
-
 app.use('/users', usersRoutes);
+app.use('/items', itemsRoutes);
 
 // Health check
 app.get('/health-check', (req, res) => {
