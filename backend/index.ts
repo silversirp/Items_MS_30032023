@@ -6,16 +6,13 @@ import * as dotenv from 'dotenv';
 import usersRoutes from "./routes/usersRoutes";
 import itemsRoutes from "./routes/itemsRoutes";
 import cors from 'cors';
+import sessionsRoute from "./routes/sessionsRoute";
 
 dotenv.config();
 const port: Number = Number(process.env.PORT) || 3000;
 const app: Express = express();
 const swaggerDocument: Object = YAML.load('./swagger.yaml');
 
-// Middleware
-app.use(express.json());
-app.use(express.static('public'));
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 
 // Error handling
@@ -24,9 +21,16 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     return res.status(err.statusCode || 500).send(err.message || 'Internal Server Error');
 });
 
+// Middleware
+app.use(express.json());
+app.use(express.static('public'));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 // Routes
 app.use('/users', usersRoutes);
 app.use('/items', itemsRoutes);
+app.use('/sessions', sessionsRoute);
 
 // Health check
 app.get('/health-check', (req, res) => {
