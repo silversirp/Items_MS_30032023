@@ -28,23 +28,6 @@ export default {
         this.$router.push('/items')
       })
     },
-    /*    checkEmail() {
-
-          // If the email is empty, don't send a request
-          if (!this.signInEmail) {
-            this.emailCheckResult = ''
-            return
-          }*/
-
-    // Send a POST /sessions/check-email request to the backend
-    /*      $http.post('/sessions/check-email', {
-            email: this.signInEmail
-          }, {disableErrorHandling: true}).then(response => {
-            this.emailCheckResult = '';
-          }).catch(response => {
-            this.emailCheckResult = response.body.error;
-          })
-        } */
   }
 }
 </script>
@@ -60,7 +43,6 @@ export default {
       </label>
       <input type="text" name="email" placeholder="Type here" class="input input-bordered w-full max-w-xs"
              v-model="signInEmail"/>
-      <!--             v-on:keyup="checkEmail"-->
       <label class="label">
       </label>
     </div>

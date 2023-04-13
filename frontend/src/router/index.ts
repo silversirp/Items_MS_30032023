@@ -4,15 +4,16 @@ import {createRouter, createWebHistory} from 'vue-router';
 // @ts-ignore
 import SignUp from '../views/SignUp.vue';
 import SignIn from '../views/SignIn.vue';
-import Notes from '../views/Intro.vue';
+import Intro from '../views/Intro.vue';
 import Items from '../views/Items.vue';
+import Modify from '../views/ItemAddUpdate.vue';
 
 const routes = [
 
     {
         path: '/',
-        name: 'Notes',
-        component: Notes,
+        name: 'Intro',
+        component: Intro,
     },
     {
         path: '/signup',
@@ -28,6 +29,11 @@ const routes = [
         path: '/items',
         name: 'List of items',
         component: Items,
+    },
+    {
+        path: '/modify',
+        name: 'Modify items',
+        component: Modify,
     }
 ];
 

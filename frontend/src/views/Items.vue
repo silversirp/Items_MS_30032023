@@ -1,9 +1,9 @@
 <template>
-  <button v-if="sessionId" @click="signOut">Sign Out</button>
+  <button class="btn btn-primary" v-if="sessionId" @click="signOut">Sign Out</button>
   <br>
-
   <h2>Here are our list of items: </h2>
-
+  <button class="btn btn-primary" @click="addItemButton">Add Item</button>
+  <br>
   <div class="overflow-x-auto">
     <table class="table table-zebra w-full">
       <thead>
@@ -39,7 +39,7 @@
 import {$http} from "../utils/http";
 // get sessionId from localStorage (4c)
 const sessionId = localStorage.getItem('sessionId')
-console.log('items.vue', sessionId)
+console.log('Items.vue', sessionId)
 
 // Fetch the items from backend
 export default {
@@ -65,7 +65,12 @@ export default {
         // Redirect to the intro page
         this.$router.push('/')
       })
-    }
+    },
+    // Add addItem method
+    addItemButton() {
+      // Redirect to the modify page
+      this.$router.push('/modify')
+    },
   }
 }
 

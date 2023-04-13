@@ -17,4 +17,20 @@ router.get(
     })
 );
 
+router.post(
+    '/',
+    handleErrors(async (req: Request, res: Response) => {
+        // Save item to database using Prisma
+        const item = await prisma.item.create({
+            data: {
+                name: req.body.name,
+                description: req.body.description,
+                image: req.body.image,
+            },
+        });
+        console.log('backend: ', item)
+        // Return item
+        return res.status(201).send(item);
+    }))
+
 export default router;
