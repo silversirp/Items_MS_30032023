@@ -13,6 +13,7 @@
         <th>Description</th>
         <th>Image</th>
         <th></th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -32,6 +33,11 @@
         <td>
           <button class="btn btn-primary" @click="getRefilledForm(item.id, item.name, item.description, item.image)">
             Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary" @click="deleteItem(item.id)">
+            Delete
           </button>
         </td>
       </tr>
@@ -85,9 +91,21 @@ export default {
       $http.get(`/items?id=${id}&name=${name}&description=${description}&image=${image}`).then(response => {
         this.$router.push({path: '/modify', query: {id: id, name: name, description: description, image: image}})
       })
+    },
+    // add deleteItem method
+    deleteItem(id) {
+      // add confirm for delete
+      if (confirm('Are you sure you want to delete this item?')) {
+        // Send a DELETE /items request to the backend
+        $http.delete(`/items?id=${id}`).then(response => {
+          // Redirect to list of items page
+          this.$router.push('/items')
+        })
+      }
     }
   }
 }
+
 </script>
 
 <style scoped>

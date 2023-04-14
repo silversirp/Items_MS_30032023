@@ -54,4 +54,19 @@ router.put(
         }
     ));
 
+// add route to delete item from database
+router.delete(
+    '/',
+    handleErrors(async (req: Request, res: Response) => {
+        // Delete item from database using Prisma
+        const item = await prisma.item.delete({
+            where: {
+                id: Number(req.query.id),
+            },
+        });
+
+        // Return item
+        return res.status(200).send(item);
+    }));
+
 export default router;
