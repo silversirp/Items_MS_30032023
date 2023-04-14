@@ -4,6 +4,14 @@ import {$http} from '../utils/http'
 
 
 export default {
+  created() {
+    const name = this.$route.query.name;
+    const description = this.$route.query.description;
+    const image = this.$route.query.image;
+    this.name = name;
+    this.description = description;
+    this.image = image;
+  },
   data() {
     return {
       name: '',
@@ -22,7 +30,18 @@ export default {
         // Redirect to list of items page
         this.$router.push('/items')
       })
-      console.log('frontend data', this.name, this.description, this.image);
+    },
+    // send a PUT request to the backend using query string filling the form
+    updateItem() {
+      $http.put(`/items?id=${this.$route.query.id}`, {
+        name: this.name,
+        description: this.description,
+        image: this.image
+      }).then(response => {
+        // Redirect to list of items page
+        this.$router.push('/items')
+      })
+      console.log("uuuuu", this.$route.query.id)
     }
   }
 }
@@ -64,9 +83,9 @@ export default {
       </label>
     </div>
     <div class="h-30">&nbsp;</div>
-    <button class="btn btn-primary" @click="addItem">Add Item</button>
+    <!--    // Check if query is present and show the Modify button else show the Save button-->
+    <button class="btn btn-primary" v-if="$route.query.id" @click="updateItem">Save</button>
+    <button class="btn btn-primary" v-else @click="addItem">Save</button>
   </div>
 
 </template>
-
-

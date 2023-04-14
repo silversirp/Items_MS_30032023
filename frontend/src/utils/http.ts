@@ -83,4 +83,10 @@ export class $http {
         return this.request('DELETE', url, null, null);
     }
 
+    static put(url: string, data: { id: string, image: string; name: string; description: string }) {
+        console.log('url: ', url);
+        return this.request('PUT', url, data, null);
+    }
+
+
 }

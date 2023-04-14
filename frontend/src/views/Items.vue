@@ -12,6 +12,7 @@
         <th>Item</th>
         <th>Description</th>
         <th>Image</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -27,6 +28,11 @@
               </div>
             </div>
           </div>
+        </td>
+        <td>
+          <button class="btn btn-primary" @click="getRefilledForm(item.id, item.name, item.description, item.image)">
+            Edit
+          </button>
         </td>
       </tr>
 
@@ -46,6 +52,9 @@ export default {
   data() {
     return {
       items: [],
+      name: '',
+      description: '',
+      image: '',
       sessionId: sessionId,
     }
   },
@@ -71,11 +80,15 @@ export default {
       // Redirect to the modify page
       this.$router.push('/modify')
     },
+    // add getRefilledForm method with data for the form fields and push to modify page
+    getRefilledForm(id, name, description, image) {
+      $http.get(`/items?id=${id}&name=${name}&description=${description}&image=${image}`).then(response => {
+        this.$router.push({path: '/modify', query: {id: id, name: name, description: description, image: image}})
+      })
+    }
   }
 }
-
 </script>
 
 <style scoped>
-
 </style>

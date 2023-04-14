@@ -33,4 +33,25 @@ router.post(
         return res.status(201).send(item);
     }))
 
+// Add route to update item in database using put PUT http://localhost:3000/items?id=71
+router.put(
+    '/',
+    handleErrors(async (req: Request, res: Response) => {
+            // Update item in database using Prisma
+            const item = await prisma.item.update({
+                where: {
+                    id: Number(req.query.id),
+                },
+                data: {
+                    name: req.body.name,
+                    description: req.body.description,
+                    image: req.body.image,
+                },
+            });
+
+            // Return item
+            return res.status(200).send(item);
+        }
+    ));
+
 export default router;
