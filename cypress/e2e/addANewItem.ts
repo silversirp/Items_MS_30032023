@@ -24,5 +24,5 @@ When('I submit the item form', () => {
 
 Then('the new item should be visible on the "Items" page', () => {
     cy.visit('http://127.0.0.1:5173/items');
-    cy.contains('New Item');
+    cy.contains(itemName);
 });
