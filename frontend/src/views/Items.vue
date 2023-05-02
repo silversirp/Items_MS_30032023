@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-primary" v-if="sessionId" @click="signOut">Sign Out</button>
+  <button class="btn btn-primary" v-if="sessionId" @click="signOut" data-test=sign-out id="sign-out-button">Sign Out</button>
   <br>
   <h2>Here are our list of items: </h2>
   <button class="btn btn-primary" @click="addItemButton">Add Item</button>
